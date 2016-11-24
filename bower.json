@@ -1,0 +1,25 @@
+{
+  "name": "web-chat",
+  "description": "web chat app",
+  "main": "index.js",
+  "authors": [
+    "Jennica Goo"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/jmg2107/web-chat",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-bootstrap": "^2.2.0",
+    "angular-route": "^1.5.8",
+    "angular-ui-router": "^0.3.2",
+    "bootstrap": "^3.3.7"
+  }
+}
