@@ -16,9 +16,17 @@ angular.module('app.services', [])
     });
   };
 
+  var sendMessage = function(msg){
+    return $http({
+      method: 'POST',
+      url: '/api/createMessage',
+      data: msg
+    })
+  }
   return {
     getMessages: getMessages,
-    loginUser: loginUser
+    loginUser: loginUser,
+    sendMessage: sendMessage
   }
 
 });

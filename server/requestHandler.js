@@ -87,7 +87,7 @@ module.exports= {
   getMessages: function(req, res, next){
 
     Chat.find()
-    .sort('-updatedAt')
+    .sort('-created_at')
     .limit(10)
     .exec(function(err, data){
       if(err){

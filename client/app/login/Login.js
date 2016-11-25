@@ -8,6 +8,7 @@ angular.module('app.login', [])
     .then(function(data){
       console.log(data);
       $rootScope.isLoggedIn = true;
+      $rootScope.activeUser = data.data.username;
       $location.path('/');
     });
   };
