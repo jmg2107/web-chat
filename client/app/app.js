@@ -1,4 +1,7 @@
 angular.module('app', ['ngRoute', 'app.services', 'app.login', 'app.chatbox'])
+  .run(function($rootScope){
+    $rootScope.isLoggedIn = false;
+  })
   .config(function($routeProvider){
     $routeProvider
       .when('/login', {

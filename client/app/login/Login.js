@@ -1,5 +1,5 @@
 angular.module('app.login', [])
-.controller('LoginController', function($scope, $location, ServicesFactory){
+.controller('LoginController', function($scope, $location, $rootScope, ServicesFactory){
   $scope.user = '';
 
   $scope.login = function(user){
@@ -7,6 +7,7 @@ angular.module('app.login', [])
     ServicesFactory.loginUser(username)
     .then(function(data){
       console.log(data);
+      $rootScope.isLoggedIn = true;
       $location.path('/');
     });
   };
