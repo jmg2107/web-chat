@@ -1,5 +1,5 @@
 angular.module('app.chatbox', [])
-.controller('ChatboxController', function($scope, $rootScope, $location, ServicesFactory){
+.controller('ChatboxController', function($scope, $rootScope, $window, ServicesFactory){
   $scope.loggedIn = $rootScope.isLoggedIn;
   $scope.activeUser;
   $scope.fullIP = $rootScope.activeUser;
@@ -38,7 +38,7 @@ angular.module('app.chatbox', [])
     console.log('hit LinkedIn');
     ServicesFactory.connectLinkedIn()
     .then(function(url){
-      $location.path(url.data);
+      $window.location.href = url.data;
     });
   }
 
