@@ -2,6 +2,10 @@ angular.module('app', ['ngRoute', 'app.services', 'app.login', 'app.chatbox'])
   .run(function($rootScope){
     $rootScope.isLoggedIn = false;
     $rootScope.activeUser = 'default';
+
+    $rootScope.logout = function(){
+      $rootScope.isLoggedIn = false;
+    };
   })
   .config(function($routeProvider){
     $routeProvider

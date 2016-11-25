@@ -93,14 +93,15 @@ module.exports= {
       if(err){
         res.status(500).send(err);
       }
-      console.log('chats are ', data);
       res.status(200).send(data);
     });
   },
 
   connectLinkedIn: function(req, res, next){
 
-    LinkedIn.auth.authorize(res, scope);
+    var auth_url = LinkedIn.auth.authorize(scope);
+
+    res.status(200).send(auth_url);
 
   },
 

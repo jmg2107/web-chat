@@ -1,6 +1,14 @@
 <div ng-controller='ChatboxController'>
 
-  <ul ng-model='messages'>
+  <div class='input' ng-show='isLoggedIn'>
+    <img src='https://api.adorable.io/avatars/50/{{fullIP}}'>
+    {{activeUser}}
+    <input type='text' ng-model='mesg' placeholder='Type your message here..' />
+    <input type='submit' value='Send' ng-click='sendMessage(mesg)'/>
+    <img src='app/images/linkedIn.png' ng-click='connectLinkedIn()'>
+  </div>
+
+  <ul ng-model='messages' style="list-style-type:none">
 
   <li ng-repeat='message in messages'>
   <img src="https://api.adorable.io/avatars/50/{{message.username}}">
@@ -8,10 +16,4 @@
 
   </ul>
 
-  <div ng-show='isLoggedIn'>
-    <img src="https://api.adorable.io/avatars/50/{{fullIP}}">
-    {{activeUser}}
-    <input type='text' ng-model='mesg' placeholder='Type your message here..' />
-    <input type='submit' ng-click='sendMessage(mesg)'/>
-  </div>
 </div>

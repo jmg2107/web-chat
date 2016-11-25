@@ -22,11 +22,20 @@ angular.module('app.services', [])
       url: '/api/createMessage',
       data: msg
     })
-  }
+  };
+
+  var connectLinkedIn = function(){
+    return $http({
+      method: 'GET',
+      url: '/api/LinkedIn'
+    });
+  };
+
   return {
     getMessages: getMessages,
     loginUser: loginUser,
-    sendMessage: sendMessage
+    sendMessage: sendMessage,
+    connectLinkedIn: connectLinkedIn
   }
 
 });

@@ -8,7 +8,7 @@
 <body>
 <nav>
   <a href="#/login" ng-hide="isLoggedIn">Login</a>
-  <a href="#/logout" ng-hide="!isLoggedIn">Logout</a>
+  <button type="button" ng-click="logout()" ng-hide="!isLoggedIn">Logout</button>
 </nav>
 
 <h1 class="title"> Web Chat Challenge </h1>
