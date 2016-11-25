@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var uriString = process.env.MONGOLAB_URI || 'mongodb://localhost/webchatdb';
+var uriString = process.env.MONGODB_URI || 'mongodb://localhost/webchatdb';
 
 mongoose.connect(uriString);
 var db = mongoose.connection;
