@@ -1,12 +1,25 @@
 <!DOCTYPE html>
+<html ng-app="app">
 <head>
-
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css"></link>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-<h1> Web Chat Challenge </h1>
+<h1 class="title"> Web Chat Challenge </h1>
 
-<img src="https://api.adorable.io/avatars/50/c.128.1.1.1">
+
+<div ng-view></div>
+  <!-- libraries -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="lib/angular-route/angular-route.js"></script>
+  <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+
+  <!-- app files -->
+  <script src="app/app.js"></script>
+  <script src="app/chatbox/Chatbox.js"></script>
+  <script src="app/login/Login.js"></script>
 
 </body>
 

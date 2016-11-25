@@ -1,0 +1,9 @@
+<div ng-controller='ChatboxController'>
+  <ul ng-model='messages'>
+
+  <li ng-repeat='message in messages'>
+  <img src="https://api.adorable.io/avatars/50/{{message.user}}">
+  {{message.user}}: {{message.message}} </li>
+
+  </ul>
+</div>
