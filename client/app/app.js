@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'app.login', 'app.chatbox'])
+angular.module('app', ['ngRoute', 'app.services', 'app.login', 'app.chatbox'])
   .config(function($routeProvider){
     $routeProvider
       .when('/login', {
