@@ -7,12 +7,17 @@ var Chat = require('./chats.js');
 if(process.env.PORT){
   var linkedInKey = process.env.LINKEDIN_KEY;
   var linkedInSecret = process.env.LINKEDIN_SECRET;
+  var host = 'https://web-chat-challenge.herokuapp.com/';
 } else {
   var linkedInKey = require('./config.js').key;
   var linkedInSecret = require('./config.js').secret;
+  var host = 'http://localhost:3000/';
 }
 
-var LinkedIn = require('node-linkedin')(linkedInKey, linkedInSecret);
+var scope = ['r_basicprofile'];
+var redirect = host + 'redirect';
+var LinkedIn = require('node-linkedin')(linkedInKey, linkedInSecret, redirect);
+var activeUser;
 
 module.exports= {
 
@@ -23,6 +28,10 @@ module.exports= {
     var username = req.body.username;
     var ipAddress = ip.address();
     username = username + '.' + ipAddress;
+
+    req.session.user = username;
+    activeUser = username;
+    console.log('req session user is ', req.session.user);
 
     var newUser = new User({
       username: username
@@ -38,8 +47,6 @@ module.exports= {
               return;
             }
             console.log('new user created');
-            req.session.user = username;
-            console.log('req session user is ', req.session.user);
 
             res.status(201).send(newUser);
 
@@ -88,9 +95,48 @@ module.exports= {
       }
       console.log('chats are ', data);
       res.status(200).send(data);
-    })
+    });
+  },
+
+  connectLinkedIn: function(req, res, next){
+
+    LinkedIn.auth.authorize(res, scope);
+
+  },
+
+  redirectLinkedIn: function(req, res, next){
+
+    LinkedIn.auth.getAccessToken(res, req.query.code, req.query.state, function(err, results) {
+        if ( err ){
+          return console.error(err);
+        }
+
+        console.log(results);
+        var linkedin = LinkedIn.init(results.access_token);
+
+        linkedin.people.me(function(err, profile) {
+            // Loads the profile of access token owner.
+            console.log('profile is ', profile);
+
+
+            User.findOne({username: activeUser})
+              .exec(function(err, user){
+                if(err){
+                  return console.error(err);
+                }
+                req.session.user = activeUser;
+                user.linkedin = profile;
+                user.save(function(err, usr){
+                  console.log('updated user is ', usr);
+                });
+              });
+        });
+        return res.redirect('/');
+    });
 
   }
+
+
 
 
 };
