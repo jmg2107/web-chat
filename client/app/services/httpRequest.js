@@ -6,10 +6,19 @@ angular.module('app.services', [])
       method: 'GET',
       url: '/api/getMessages'
     });
-  }
+  };
+
+  var loginUser = function(usr){
+    return $http({
+      method: 'POST',
+      data: usr,
+      url: '/api/createUser'
+    });
+  };
 
   return {
-    getMessages: getMessages
+    getMessages: getMessages,
+    loginUser: loginUser
   }
 
 });
