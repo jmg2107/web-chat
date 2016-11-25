@@ -38,7 +38,7 @@ angular.module('app.chatbox', [])
     console.log('hit LinkedIn');
     ServicesFactory.connectLinkedIn()
     .then(function(url){
-      $location.path = url.data;
+      $location.path(url.data);
     });
   }
 
