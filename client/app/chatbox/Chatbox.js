@@ -41,7 +41,7 @@ angular.module('app.chatbox', [])
   $scope.connectLinkedIn = function(){
     ServicesFactory.connectLinkedIn()
     .then(function(url){
-      window.localStorage.setItem('linkedin', 'false');
+      window.localStorage.setItem('linkedin', 'true');
       window.localStorage.setItem('isLoggedIn', 'false');
       $scope.loggedIn = false;
       $window.location.href = url.data;
