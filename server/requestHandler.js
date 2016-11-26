@@ -67,20 +67,27 @@ module.exports= {
     var username = req.session.user;
     var msg = req.body.message;
 
-    var newMessage = new Chat({
-      message: msg,
-      username: username
-    });
-
-    newMessage.save(function(err, newMsg){
-      if(err){
-        res.status(500).send(err);
-        return;
-      } else {
-        console.log('new message inserted');
-        res.status(201).send(newMsg);
-      }
-    });
+    User.findOne({username: username})
+      .exec(function(err, user){
+        var profile = undefined;
+        if(user.linkedin){
+          profile = user.linkedin.pictureUrl;
+        }
+        var newMessage = new Chat({
+          message: msg,
+          username: username,
+          linkedIn: profile
+        });
+        newMessage.save(function(err, newMsg){
+          if(err){
+            res.status(500).send(err);
+            return;
+          } else {
+            console.log('new message inserted');
+            res.status(201).send(newMsg);
+          }
+        });
+      });
 
   },
 

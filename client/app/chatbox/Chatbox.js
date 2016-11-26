@@ -10,13 +10,11 @@ angular.module('app.chatbox', [])
 
   $scope.getAll = function(){
 
-    console.log('get All');
     var usr = $rootScope.activeUser.split('.');
     $scope.activeUser = usr[0];
 
     ServicesFactory.getMessages()
     .then(function(data){
-      console.log(data);
       data.data.forEach(function(chat){
         var name = chat.username.split('.');
         chat.name = name[0];
@@ -47,7 +45,6 @@ angular.module('app.chatbox', [])
     });
   }
 
-  $scope.getAll();
 
 
 });

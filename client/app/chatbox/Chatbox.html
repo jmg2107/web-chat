@@ -12,7 +12,8 @@
   <ul ng-model='messages' style="list-style-type:none">
 
   <li ng-repeat='message in messages'>
-  <img src="https://api.adorable.io/avatars/50/{{message.username}}">
+  <img ng-if='message.linkedIn !== undefined' src='{{message.linkedIn}}'>
+  <img ng-if='message.linkedIn === undefined' src="https://api.adorable.io/avatars/50/{{message.username}}">
   {{message.name}}: {{message.message}} </li>
 
   </ul>
