@@ -7,10 +7,17 @@ angular.module('app', ['ngRoute', 'app.services', 'app.login', 'app.chatbox'])
     } else {
       $rootScope.isLoggedIn = true;
     }
-    var linkedin = window.localStorage.getItem('linkedin') === null ? null : window.localStorage.getItem('linkedin') === 'false' ? false : true;
+
+    if(window.localStorage.getItem('linkedin') === 'null' ||
+      window.localStorage.getItem('linkedin') === 'false' ||
+      window.localStorage.getItem('linkedin') === null){
+      $rootScope.linkedin = false;
+    } else {
+      $rootScope.linkedin = true;
+    }
+
     $rootScope.activeUser = 'default';
     $rootScope.userData = '';
-    $rootScope.linkedin = linkedin;
 
     $rootScope.logout = function(){
       $rootScope.isLoggedIn = false;

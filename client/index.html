@@ -14,7 +14,7 @@
 <button class="login" ng-hide="isLoggedIn">
   <a href="#/login" >Login</a>
 </button>
-<div class="title" ng-if="linkedin === true">Your LinkedIn account is now connected.  Please log back in with your Web Chat username</div>
+<div class="title" ng-show="linkedin">Your LinkedIn account is now connected.  Please log back in with your Web Chat username</div>
 
 <div ng-view></div>
   <!-- libraries -->
