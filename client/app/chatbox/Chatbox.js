@@ -1,14 +1,16 @@
 angular.module('app.chatbox', [])
-.controller('ChatboxController', function($scope, $rootScope, $window, ServicesFactory){
+.controller('ChatboxController', function($scope, $rootScope, $timeout, $window, ServicesFactory){
   $scope.loggedIn = $rootScope.isLoggedIn;
   $scope.activeUser;
   $scope.fullIP = $rootScope.activeUser;
   $scope.mesg = '';
+  $scope.userData = $rootScope.userData;
 
   $scope.messages = [ {username: 'Jen', message: 'Hello'}, {username: 'Fontip', message: 'Hi Honey'}];
 
   $scope.getAll = function(){
 
+    console.log('get All');
     var usr = $rootScope.activeUser.split('.');
     $scope.activeUser = usr[0];
 
@@ -20,8 +22,12 @@ angular.module('app.chatbox', [])
         chat.name = name[0];
       });
       $scope.messages = data.data;
+      $timeout($scope.getAll, 1000);
     });
+
   };
+
+  $timeout($scope.getAll, 1000);
 
   $scope.sendMessage = function(msg){
     var message = {message: msg};
@@ -30,7 +36,6 @@ angular.module('app.chatbox', [])
     .then(function(data){
       console.log(data);
       $scope.mesg = '';
-      $scope.getAll();
     });
   };
 

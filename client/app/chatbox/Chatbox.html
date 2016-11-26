@@ -1,11 +1,12 @@
 <div ng-controller='ChatboxController'>
 
   <div class='input' ng-show='isLoggedIn'>
-    <img src='https://api.adorable.io/avatars/50/{{fullIP}}'>
+    <img ng-show='!userData.linkedin' src='https://api.adorable.io/avatars/50/{{fullIP}}'>
+    <img ng-show='userData.linkedin' src='{{userData.linkedin.pictureUrl}}'>
     {{activeUser}}
     <input type='text' ng-model='mesg' placeholder='Type your message here..' />
     <input type='submit' value='Send' ng-click='sendMessage(mesg)'/>
-    <img src='app/images/linkedIn.png' ng-click='connectLinkedIn()'>
+    <img ng-show='!userData.linkedin' src='app/images/linkedIn.png' ng-click='connectLinkedIn()'>
   </div>
 
   <ul ng-model='messages' style="list-style-type:none">
