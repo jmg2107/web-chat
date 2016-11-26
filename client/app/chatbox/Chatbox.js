@@ -2,16 +2,16 @@ angular.module('app.chatbox', [])
 .controller('ChatboxController', function($scope, $rootScope, $timeout, $window, ServicesFactory){
   $scope.loggedIn = $rootScope.isLoggedIn;
   $scope.activeUser;
-  $scope.fullIP = $rootScope.activeUser;
+  $scope.fullIP = window.localStorage.getItem('activeUser');
   $scope.mesg = '';
-  $scope.userData = $rootScope.userData;
+  $scope.userData = window.localStorage.getItem('userData') === 'false' ? false :  window.localStorage.getItem('userData') ;
 
-  $scope.messages = [ {username: 'Jen', message: 'Hello'}, {username: 'Fontip', message: 'Hi Honey'}];
+  $scope.messages = [];
 
   $scope.getAll = function(){
-
     var usr = $rootScope.activeUser.split('.');
     $scope.activeUser = usr[0];
+
 
     ServicesFactory.getMessages()
     .then(function(data){
@@ -22,6 +22,7 @@ angular.module('app.chatbox', [])
       $scope.messages = data.data;
       $timeout($scope.getAll, 1000);
     });
+
 
   };
 
@@ -38,9 +39,11 @@ angular.module('app.chatbox', [])
   };
 
   $scope.connectLinkedIn = function(){
-    console.log('hit LinkedIn');
     ServicesFactory.connectLinkedIn()
     .then(function(url){
+    console.log('hit LinkedIn');
+      window.localStorage.setItem('linkedin', 'true');
+      window.localStorage.setItem('isLoggedIn', 'false');
       $window.location.href = url.data;
     });
   }

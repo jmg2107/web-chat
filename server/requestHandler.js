@@ -138,8 +138,9 @@ module.exports= {
                   console.log('updated user is ', usr);
                 });
               });
+
+            return res.redirect('/');
         });
-        return res.redirect('/');
     });
 
   }
