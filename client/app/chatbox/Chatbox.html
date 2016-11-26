@@ -1,6 +1,6 @@
 <div ng-controller='ChatboxController'>
 
-  <div class='input' ng-show='isLoggedIn'>
+  <div class='input' ng-show='loggedIn'>
     <img ng-show='!userData' ng-model='userData' src='https://api.adorable.io/avatars/50/{{fullIP}}'>
     <img ng-show='userData' ng-model='userData' src='{{userData}}'>
    {{activeUser}}
@@ -12,9 +12,10 @@
   <ul ng-model='messages' style="list-style-type:none">
 
   <li ng-repeat='message in messages'>
-  <img ng-if='message.linkedIn !== undefined' src='{{message.linkedIn}}'>
-  <img ng-if='message.linkedIn === undefined' src="https://api.adorable.io/avatars/50/{{message.username}}">
-  {{message.name}}: {{message.message}} </li>
+    <img ng-if='message.linkedIn !== undefined' src='{{message.linkedIn}}'>
+    <img ng-if='message.linkedIn === undefined' src="https://api.adorable.io/avatars/50/{{message.username}}">
+    {{message.name}}: {{message.message}}
+  </li>
 
   </ul>
 

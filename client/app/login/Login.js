@@ -6,7 +6,6 @@ angular.module('app.login', [])
     var username = {username: user};
     ServicesFactory.loginUser(username)
     .then(function(data){
-      console.log(data);
       $rootScope.isLoggedIn = true;
       $rootScope.userData = data.data;
       $rootScope.activeUser = data.data.username;

@@ -29,11 +29,11 @@ angular.module('app.chatbox', [])
   $timeout($scope.getAll, 1000);
 
   $scope.sendMessage = function(msg){
+
     var message = {message: msg};
 
     ServicesFactory.sendMessage(message)
     .then(function(data){
-      console.log(data);
       $scope.mesg = '';
     });
   };
@@ -41,9 +41,9 @@ angular.module('app.chatbox', [])
   $scope.connectLinkedIn = function(){
     ServicesFactory.connectLinkedIn()
     .then(function(url){
-    console.log('hit LinkedIn');
       window.localStorage.setItem('linkedin', 'true');
       window.localStorage.setItem('isLoggedIn', 'false');
+      $scope.loggedIn = false;
       $window.location.href = url.data;
     });
   }

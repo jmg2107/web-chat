@@ -22,8 +22,6 @@ var activeUser;
 module.exports= {
 
   createUser: function(req, res, next){
-    console.log('hit createUser');
-    console.log('username is ', req.body.username);
 
     var username = req.body.username;
     var ipAddress = ip.address();
@@ -31,7 +29,6 @@ module.exports= {
 
     req.session.user = username;
     activeUser = username;
-    console.log('req session user is ', req.session.user);
 
     var newUser = new User({
       username: username
@@ -46,13 +43,11 @@ module.exports= {
               res.status(500).send(err);
               return;
             }
-            console.log('new user created');
 
             res.status(201).send(newUser);
 
           });
         } else {
-          console.log('user already exists: ', user);
           res.status(200).send(user);
         }
 
@@ -62,8 +57,7 @@ module.exports= {
   },
 
   createMessage: function(req, res, next){
-    console.log('message is ', req.body.message);
-    console.log('user is ', req.session.user);
+
     var username = req.session.user;
     var msg = req.body.message;
 
@@ -83,7 +77,6 @@ module.exports= {
             res.status(500).send(err);
             return;
           } else {
-            console.log('new message inserted');
             res.status(201).send(newMsg);
           }
         });
@@ -124,8 +117,6 @@ module.exports= {
 
         linkedin.people.me(function(err, profile) {
             // Loads the profile of access token owner.
-            console.log('profile is ', profile);
-
 
             User.findOne({username: activeUser})
               .exec(function(err, user){
@@ -135,7 +126,6 @@ module.exports= {
                 req.session.user = activeUser;
                 user.linkedin = profile;
                 user.save(function(err, usr){
-                  console.log('updated user is ', usr);
                 });
               });
 

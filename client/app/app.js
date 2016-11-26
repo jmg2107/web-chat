@@ -1,8 +1,13 @@
 angular.module('app', ['ngRoute', 'app.services', 'app.login', 'app.chatbox'])
   .run(function($rootScope){
-    var localStorage = window.localStorage.getItem('isLoggedIn') === 'false' ? false : true;
-    var linkedin = window.localStorage.getItem('linkedin') === 'false' ? false : true;
-    $rootScope.isLoggedIn = localStorage;
+    if(window.localStorage.getItem('isLoggedIn') === 'null' ||
+      window.localStorage.getItem('isLoggedIn') === 'false' ||
+      window.localStorage.getItem('isLoggedIn') === null){
+      $rootScope.isLoggedIn = false;
+    } else {
+      $rootScope.isLoggedIn = true;
+    }
+    var linkedin = window.localStorage.getItem('linkedin') === null ? null : window.localStorage.getItem('linkedin') === 'false' ? false : true;
     $rootScope.activeUser = 'default';
     $rootScope.userData = '';
     $rootScope.linkedin = linkedin;
@@ -13,7 +18,9 @@ angular.module('app', ['ngRoute', 'app.services', 'app.login', 'app.chatbox'])
       window.localStorage.setItem('userData', 'false');
       window.localStorage.setItem('activeUser', 'false');
       window.localStorage.setItem('linkedin', 'false');
+      window.location.reload();
     };
+
   })
   .config(function($routeProvider){
     $routeProvider
